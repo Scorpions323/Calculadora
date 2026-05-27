@@ -10,11 +10,11 @@ public class ContadorIP {
     private static final int VALOR_INICIAL = 0;
     private static final int INCREMENTO = 1;
 
-    public void incrementar(String ip) {
+    public synchronized void incrementar(String ip) {
         peticionesPorIp.merge(ip, INCREMENTO, Integer::sum);
     }
 
-    public int obtener(String ip) {
+    public synchronized int obtener(String ip) {
         Integer valor = peticionesPorIp.get(ip);
         return (valor == null) ? VALOR_INICIAL : valor;
     }
